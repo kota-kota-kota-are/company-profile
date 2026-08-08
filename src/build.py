@@ -13,6 +13,21 @@ for n in (1, 2, 3):
     if not f.exists():
         sys.exit(f"missing: {f}")
     parts.append(f.read_text())
+
+# サービス一覧は part2 の1つ目のセクション（こんな課題、ありませんか？）の直後に差し込む。
+# 「何がいくらであるのか」を詳細より先に見せるため。
+menu_f = D / "part-menu.html"
+if menu_f.exists():
+    p2 = parts[1]
+    end = p2.find("</section>")
+    if end == -1:
+        sys.exit("part2 に </section> が見つからず、サービス一覧を挿入できない")
+    end += len("</section>")
+    parts[1] = p2[:end] + "\n" + menu_f.read_text() + "\n" + p2[end:]
+    print("サービス一覧を part2 の1セクション目の直後に挿入")
+else:
+    print("警告: part-menu.html が無いため、サービス一覧は挿入されない")
+
 body = "\n".join(parts)
 
 # ---------- 2. 実際に使われている文字を集める ----------
@@ -125,7 +140,7 @@ out = f"""<title>創発の種 — 会社紹介</title>
 </script>
 """
 
-target = D / "company-profile.html"
+target = D.parent / "index.html"   # 公開用は src/ の1つ上に出す
 target.write_text(out)
 print(f"built: {target} ({len(out)//1024} KB)")
 

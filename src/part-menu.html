@@ -1,0 +1,160 @@
+<style>
+.s-menu{
+  padding:clamp(3.5rem,9vw,6.5rem) clamp(1.25rem,6vw,4rem);
+  border-bottom:1px solid var(--rule);
+  background:var(--band);
+}
+.s-menu .menu__wrap{max-width:62rem;margin-inline:auto}
+.s-menu .menu__eyebrow{
+  font-size:.7rem;letter-spacing:.24em;color:var(--accent-text);font-weight:700;
+  margin:0 0 1.1rem;padding-top:.55rem;border-top:2px solid var(--accent);display:inline-block;
+}
+.s-menu .menu__h{
+  font-size:clamp(1.7rem,4.6vw,2.7rem);line-height:1.4;margin:0 0 .9rem;
+  font-weight:700;text-wrap:balance;letter-spacing:-.005em;
+}
+.s-menu .menu__lead{font-size:1rem;color:var(--mute);margin:0 0 2.8rem;max-width:36rem}
+
+.s-menu .menu__grp{margin-bottom:2.6rem}
+.s-menu .menu__grp:last-of-type{margin-bottom:0}
+.s-menu .menu__grp-h{
+  display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap;
+  margin:0 0 .3rem;padding-bottom:.7rem;border-bottom:2px solid var(--accent);
+}
+.s-menu .menu__grp-n{
+  font-size:1.15rem;font-weight:700;color:var(--text);letter-spacing:.02em;
+}
+.s-menu .menu__grp-d{font-size:.84rem;color:var(--mute)}
+
+.s-menu .menu__row{
+  display:grid;gap:.35rem 1.4rem;padding:1.15rem 0;
+  border-bottom:1px solid var(--rule);align-items:baseline;
+}
+@media(min-width:46rem){
+  .s-menu .menu__row{grid-template-columns:15rem 10rem 1fr}
+}
+.s-menu .menu__name{font-weight:700;font-size:1.02rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.s-menu .menu__price{
+  font-size:1.32rem;font-weight:700;font-variant-numeric:tabular-nums;
+  white-space:nowrap;letter-spacing:-.01em;
+}
+.s-menu .menu__price small{font-size:.76rem;font-weight:400;color:var(--mute);margin-left:.15rem}
+.s-menu .menu__free{color:var(--accent-text)}
+.s-menu .menu__for{font-size:.9rem;color:var(--mute);margin:0;line-height:1.75}
+.s-menu .menu__for b{color:var(--text);font-weight:700}
+.s-menu .menu__rec{
+  font-size:.66rem;font-weight:700;letter-spacing:.1em;
+  background:var(--accent);color:#201F1F;
+  padding:.22rem .5rem;border-radius:2px;white-space:nowrap;
+}
+.s-menu .menu__note{
+  font-size:.85rem;color:var(--mute);margin:.9rem 0 0;padding-left:1rem;
+  border-left:3px solid var(--accent);line-height:1.8;
+}
+.s-menu .menu__close{
+  margin:3rem 0 0;padding:1.5rem 1.6rem;background:var(--page);
+  border:1px solid var(--rule);border-radius:3px;
+}
+.s-menu .menu__close p{margin:0;font-size:1rem;line-height:1.85}
+.s-menu .menu__close b{color:var(--accent-text)}
+
+@media print{
+  .s-menu{background:#fff !important;break-inside:avoid;page-break-inside:avoid;
+    padding-block:2rem !important;border-bottom:1px solid #ccc}
+  .s-menu .menu__h{font-size:1.45rem !important}
+  .s-menu .menu__rec{background:#B2C250 !important;color:#111 !important}
+  .s-menu .menu__close{background:#fff !important;border:1px solid #ccc}
+  .s-menu .menu__row{break-inside:avoid;page-break-inside:avoid}
+}
+</style>
+
+<section class="s-menu" aria-labelledby="menu-h">
+  <div class="menu__wrap">
+    <p class="menu__eyebrow">SERVICE</p>
+    <h2 class="menu__h" id="menu-h">サービス一覧</h2>
+    <p class="menu__lead">出会うところから、つくるところまで。困っている段階に合わせて選べます。</p>
+
+    <div class="menu__grp">
+      <div class="menu__grp-h">
+        <span class="menu__grp-n">1. 知る</span>
+        <span class="menu__grp-d">まず、何ができるのかを知る</span>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">YouTube</p>
+        <p class="menu__price menu__free">無料</p>
+        <p class="menu__for">AIやITで何が変わるのかを、事例で見る。<b>2026年8月スタート</b></p>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">AI・IT勉強会（オンライン）</p>
+        <p class="menu__price menu__free">無料<small>／週1回</small></p>
+        <p class="menu__for">30分。AIの最新トレンドと、中小企業での使いどころ。</p>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">AI・IT勉強会（オフライン）</p>
+        <p class="menu__price">3,000<small>〜5,000円／月1回</small></p>
+        <p class="menu__for">2〜3時間のハンズオン。<b>手を動かして覚えたい方向け。</b></p>
+      </div>
+    </div>
+
+    <div class="menu__grp">
+      <div class="menu__grp-h">
+        <span class="menu__grp-n">2. 調べる</span>
+        <span class="menu__grp-d">自社の課題を、言葉にする</span>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">DX診断・梅</p>
+        <p class="menu__price menu__free">無料</p>
+        <p class="menu__for">AI音声診断＋60分の相談。<b>何から始めればいいか分からない</b>状態から、課題を整理します。</p>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">DX診断・竹</p>
+        <p class="menu__price">10,000<small>円</small></p>
+        <p class="menu__for">AI診断＋簡易改善レポート。<b>改善の方向性</b>を持ち帰れます。</p>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">DX診断・松</p>
+        <p class="menu__price">150,000<small>円</small></p>
+        <p class="menu__for">詳細分析＋DX戦略レポート＋実装ロードマップ。<b>投資判断まで固めたい方へ。</b></p>
+      </div>
+    </div>
+
+    <div class="menu__grp">
+      <div class="menu__grp-h">
+        <span class="menu__grp-n">3. 伴走する</span>
+        <span class="menu__grp-d">パートナーエンジニア（月額）</span>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">小さく自動化・現状整理</p>
+        <p class="menu__price">25,000<small>円／月</small></p>
+        <p class="menu__for">まずは身近な手作業をなくし、課題を整理するところから。</p>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">業務をまたいで仕組み化 <span class="menu__rec">おすすめ</span></p>
+        <p class="menu__price">50,000<small>円／月</small></p>
+        <p class="menu__for">複数のツールや業務を連携させ、<b>組織全体の効率を改善します。</b></p>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">小さな業務システムを一緒に作る</p>
+        <p class="menu__price">100,000<small>円／月</small></p>
+        <p class="menu__for">既存ツールでは解決できない課題に、最適なツールを共同で設計・作成。</p>
+      </div>
+      <p class="menu__note">全プラン共通で<b>隔週MTG</b>を実施します。どこまで対応できるかは、このあとの比較表で確認できます。</p>
+    </div>
+
+    <div class="menu__grp">
+      <div class="menu__grp-h">
+        <span class="menu__grp-n">4. つくる</span>
+        <span class="menu__grp-d">オーダーメイド開発</span>
+      </div>
+      <div class="menu__row">
+        <p class="menu__name">オーダーメイド開発</p>
+        <p class="menu__price">300,000<small>円〜</small></p>
+        <p class="menu__for">Webアプリ／LINE連携／顧客管理／業務システム／予約管理。数百万円レンジまで対応します。</p>
+      </div>
+    </div>
+
+    <div class="menu__close">
+      <p><b>上から順に進む必要はありません。</b>いきなり開発の相談でも、勉強会だけの参加でも構いません。いま困っているところから入ってください。</p>
+    </div>
+  </div>
+</section>
