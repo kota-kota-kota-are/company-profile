@@ -1,0 +1,825 @@
+<style>
+/* =========================================================
+   PART3 : 業種別にできること（タブ） / 末尾セクション群 / CTA
+   セレクタは必ず .s-ind / .s-more / .s-cta から始める
+   色は必ず CSS 変数経由（例外: var(--accent) の面上の文字 #201F1F）
+   ========================================================= */
+
+.s-ind,
+.s-more,
+.s-cta{
+  font-family:"ZenMaru","Hiragino Maru Gothic ProN","Hiragino Sans",system-ui,sans-serif;
+  font-variant-numeric:tabular-nums;
+  line-height:1.9;
+  letter-spacing:.02em;
+  color:var(--text);
+  background:var(--page);
+  overflow-x:clip;
+  -webkit-text-size-adjust:100%;
+}
+.s-ind *,
+.s-more *,
+.s-cta *{box-sizing:border-box}
+
+.s-ind p,.s-ind h2,.s-ind h3,.s-ind ul,.s-ind li,
+.s-more p,.s-more h2,.s-more h3,.s-more ul,.s-more li,.s-more dl,.s-more dt,.s-more dd,
+.s-cta p,.s-cta h2{margin:0;padding:0}
+.s-ind ul,.s-more ul{list-style:none}
+
+/* ---------- 共通ラッパ / 見出し ---------- */
+.s-ind .wrap,
+.s-more .wrap,
+.s-cta .wrap{
+  width:100%;
+  max-width:1080px;
+  margin-inline:auto;
+  padding-inline:clamp(1.25rem,5vw,3.25rem);
+}
+.s-ind{padding-block:clamp(3.75rem,10vw,7rem)}
+.s-more{padding-block:clamp(3.25rem,8vw,5.75rem)}
+.s-cta{padding-block:clamp(4rem,10vw,7rem)}
+
+.s-more.on-band{background:var(--band)}
+
+.s-ind .eyebrow,
+.s-more .eyebrow{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.22em;
+  color:var(--mute);
+  margin-bottom:clamp(.7rem,2vw,1.1rem);
+}
+.s-ind .eyebrow::before,
+.s-more .eyebrow::before{
+  content:"";
+  display:block;
+  width:1.6rem;
+  height:2px;
+  background:var(--accent);
+  flex:none;
+}
+
+.s-ind h2,
+.s-more h2{
+  font-weight:700;
+  font-size:clamp(1.5rem,3.9vw,2.5rem);
+  line-height:1.45;
+  letter-spacing:.01em;
+  text-wrap:balance;
+  overflow-wrap:break-word;
+}
+.s-ind .lead,
+.s-more .lead{
+  margin-top:clamp(.8rem,2vw,1.2rem);
+  color:var(--mute);
+  font-size:clamp(.94rem,1.6vw,1.06rem);
+  max-width:44em;
+  text-wrap:pretty;
+}
+
+/* =========================================================
+   .s-ind — 業種別にできること（タブ）
+   ========================================================= */
+.s-ind .tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem .5rem;
+  margin-top:clamp(1.75rem,4vw,2.75rem);
+  padding-bottom:clamp(1.25rem,3vw,1.75rem);
+  border-bottom:1px solid var(--rule);
+}
+.s-ind .tab{
+  font:inherit;
+  font-weight:600;
+  font-size:clamp(.85rem,1.5vw,.97rem);
+  line-height:1.6;
+  letter-spacing:.02em;
+  color:var(--text);
+  background:var(--page);
+  border:1px solid var(--rule);
+  border-radius:999px;
+  padding:.5rem 1.05rem;
+  cursor:pointer;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease;
+}
+.s-ind .tab:hover{border-color:var(--accent);background:var(--tint)}
+.s-ind .tab[aria-selected="true"]{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#201F1F;
+  font-weight:700;
+}
+.s-ind .tab:focus-visible,
+.s-ind [role="tabpanel"]:focus-visible{
+  outline:2px solid var(--accent-text);
+  outline-offset:3px;
+  border-radius:999px;
+}
+.s-ind [role="tabpanel"]:focus-visible{border-radius:14px}
+
+.s-ind [role="tabpanel"][hidden]{display:none}
+.s-ind [role="tabpanel"]{
+  margin-top:clamp(1.5rem,3.5vw,2.25rem);
+  display:grid;
+  gap:clamp(.9rem,2vw,1.25rem);
+  animation:s-ind-in .28s ease both;
+}
+@keyframes s-ind-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* パネル見出し（画面では読み上げ専用 / 印刷で表示） */
+.s-ind .panel-title{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+/* --- 1例 = カード --- */
+.s-ind .ex{
+  background:var(--tint);
+  border:1px solid var(--rule);
+  border-radius:16px;
+  padding:clamp(1rem,2.4vw,1.45rem);
+  display:grid;
+  gap:.85rem;
+  align-items:center;
+}
+.s-ind .ex-head{
+  display:flex;
+  align-items:baseline;
+  gap:.65rem;
+  min-width:0;
+}
+.s-ind .ex-n{
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  color:var(--accent-text);
+  flex:none;
+}
+.s-ind .ex-name{
+  font-weight:700;
+  font-size:clamp(.98rem,1.8vw,1.1rem);
+  line-height:1.6;
+  overflow-wrap:break-word;
+}
+.s-ind .lab{
+  display:block;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  line-height:1.6;
+  margin-bottom:.15rem;
+}
+.s-ind .before .lab{color:var(--mute)}
+.s-ind .after .lab{color:var(--accent-text)}
+.s-ind .before{
+  color:var(--mute);
+  font-size:clamp(.9rem,1.6vw,1rem);
+  line-height:1.85;
+  padding:.15rem .1rem;
+  overflow-wrap:break-word;
+}
+.s-ind .after{
+  color:var(--text);
+  font-size:clamp(.92rem,1.7vw,1.02rem);
+  line-height:1.85;
+  font-weight:600;
+  background:var(--page);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--accent);
+  border-radius:4px 12px 12px 4px;
+  padding:.7rem .95rem;
+  overflow-wrap:break-word;
+}
+.s-ind .ex-arrow{
+  color:var(--accent-text);
+  font-size:1.25rem;
+  line-height:1;
+  text-align:center;
+  transform:rotate(90deg);
+  transform-origin:center;
+}
+
+@media (min-width:820px){
+  .s-ind .ex{
+    grid-template-columns:minmax(8rem,12.5rem) minmax(0,1fr) 1.8rem minmax(0,1.15fr);
+    gap:clamp(.8rem,1.8vw,1.35rem);
+  }
+  .s-ind .ex-arrow{transform:none;font-size:1.35rem}
+}
+
+/* =========================================================
+   .s-more — 末尾セクション群
+   ========================================================= */
+.s-more .cols{
+  margin-top:clamp(1.6rem,3.5vw,2.4rem);
+  display:grid;
+  gap:clamp(1rem,2.4vw,1.5rem);
+}
+.s-more .price{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.4rem .8rem;
+}
+.s-more .price .num{
+  font-size:clamp(1.9rem,5vw,3rem);
+  font-weight:700;
+  line-height:1.25;
+  color:var(--accent-text);
+  letter-spacing:.01em;
+}
+.s-more .price .note{
+  font-size:clamp(.86rem,1.5vw,.96rem);
+  color:var(--mute);
+}
+.s-more .chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-top:clamp(1rem,2.4vw,1.4rem);
+}
+.s-more .chip{
+  font-size:clamp(.8rem,1.4vw,.9rem);
+  font-weight:600;
+  line-height:1.6;
+  color:var(--text);
+  background:var(--tint);
+  border:1px solid var(--rule);
+  border-radius:999px;
+  padding:.38rem .95rem;
+}
+
+/* B. 出会い方 */
+.s-more .ways{
+  margin-top:clamp(1.5rem,3.5vw,2.25rem);
+  border-top:1px solid var(--rule);
+}
+.s-more .way{
+  display:grid;
+  gap:.15rem .5rem;
+  padding-block:clamp(.9rem,2.2vw,1.25rem);
+  border-bottom:1px solid var(--rule);
+}
+.s-more .way dt{
+  font-weight:700;
+  font-size:clamp(.95rem,1.7vw,1.06rem);
+  line-height:1.7;
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+.s-more .way dt::before{
+  content:"";
+  display:block;
+  width:.55rem;height:.55rem;
+  border-radius:2px;
+  background:var(--accent);
+  flex:none;
+}
+.s-more .way dd{
+  color:var(--mute);
+  font-size:clamp(.9rem,1.6vw,1rem);
+  line-height:1.85;
+  overflow-wrap:break-word;
+}
+@media (min-width:720px){
+  .s-more .way{grid-template-columns:minmax(8rem,13rem) minmax(0,1fr);align-items:baseline}
+}
+
+/* C. シェアハウス */
+.s-more .points{
+  margin-top:clamp(1.4rem,3.2vw,2rem);
+  display:grid;
+  gap:.75rem;
+  max-width:46em;
+}
+.s-more .points li{
+  position:relative;
+  padding-left:1.4rem;
+  font-size:clamp(.95rem,1.7vw,1.05rem);
+  line-height:1.9;
+  overflow-wrap:break-word;
+}
+.s-more .points li::before{
+  content:"";
+  position:absolute;
+  left:0;top:.72em;
+  width:.5rem;height:.5rem;
+  border-radius:2px;
+  background:var(--accent);
+}
+.s-more .points li.em{font-weight:700}
+
+/* D. これまでにつくったもの */
+.s-more .works{
+  margin-top:clamp(1.6rem,3.5vw,2.4rem);
+  display:grid;
+  gap:clamp(.9rem,2vw,1.25rem);
+}
+@media (min-width:860px){
+  .s-more .works{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+.s-more .work{
+  background:var(--page);
+  border:1px solid var(--rule);
+  border-radius:16px;
+  padding:clamp(1.1rem,2.4vw,1.5rem);
+  display:grid;
+  gap:.55rem;
+  align-content:start;
+}
+.s-more.on-band .work{background:var(--page)}
+.s-more .work .cat{
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  color:var(--accent-text);
+  line-height:1.6;
+}
+.s-more .work h3{
+  margin:0;
+  font-weight:700;
+  font-size:clamp(1.02rem,1.9vw,1.16rem);
+  line-height:1.6;
+  overflow-wrap:break-word;
+}
+.s-more .work p{
+  color:var(--mute);
+  font-size:clamp(.88rem,1.55vw,.98rem);
+  line-height:1.85;
+  overflow-wrap:break-word;
+}
+
+/* =========================================================
+   .s-cta
+   ========================================================= */
+.s-cta{
+  background:var(--accent);
+  color:#201F1F;
+}
+.s-cta h2{
+  font-weight:700;
+  font-size:clamp(1.6rem,4.6vw,2.75rem);
+  line-height:1.45;
+  letter-spacing:.01em;
+  text-wrap:balance;
+  color:#201F1F;
+}
+.s-cta .body{
+  margin-top:clamp(1.4rem,3vw,2rem);
+  padding-top:clamp(1.4rem,3vw,2rem);
+  border-top:1px solid color-mix(in srgb,#201F1F 22%,transparent);
+  display:grid;
+  gap:.35rem;
+  max-width:42em;
+}
+.s-cta .body p{
+  color:#201F1F;
+  font-size:clamp(.98rem,1.9vw,1.18rem);
+  line-height:2;
+  text-wrap:pretty;
+  overflow-wrap:break-word;
+}
+
+/* ---------- モーション配慮 ---------- */
+@media (prefers-reduced-motion:reduce){
+  .s-ind *,.s-more *,.s-cta *{
+    animation:none !important;
+    transition:none !important;
+  }
+  .s-ind [role="tabpanel"]{animation:none !important}
+}
+
+/* ---------- 印刷 ---------- */
+@media print{
+  .s-ind,.s-more,.s-cta{
+    background:#fff !important;
+    color:#201F1F !important;
+    padding-block:1.2rem !important;
+  }
+  .s-ind .wrap,.s-more .wrap,.s-cta .wrap{max-width:none;padding-inline:0}
+
+  /* タブは印刷で機能しないため、全業種を展開 */
+  .s-ind .tabs{display:none !important}
+  .s-ind [role="tabpanel"]{
+    display:block !important;
+    animation:none !important;
+    margin-top:0 !important;
+    break-inside:avoid;
+    page-break-inside:avoid;
+    margin-bottom:.9rem;
+  }
+  .s-ind .panel-title{
+    position:static !important;
+    width:auto !important;height:auto !important;
+    margin:1.1rem 0 .5rem !important;
+    clip:auto !important;
+    clip-path:none !important;
+    overflow:visible !important;
+    white-space:normal !important;
+    font-size:1.05rem;
+    font-weight:700;
+    color:#201F1F !important;
+    border-bottom:1px solid color-mix(in srgb,#201F1F 30%,transparent);
+    padding-bottom:.3rem;
+  }
+  .s-ind .ex,
+  .s-more .work,
+  .s-more .way,
+  .s-cta .body{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+  .s-ind .ex{
+    background:#fff !important;
+    border:1px solid color-mix(in srgb,#201F1F 28%,transparent) !important;
+    margin-bottom:.5rem;
+  }
+  .s-ind .before{color:color-mix(in srgb,#201F1F 62%,#fff) !important}
+  .s-ind .after{
+    background:#fff !important;
+    color:#201F1F !important;
+    border:1px solid color-mix(in srgb,#201F1F 28%,transparent) !important;
+    border-left:3px solid #201F1F !important;
+  }
+  .s-ind .after .lab,
+  .s-ind .ex-n,
+  .s-ind .ex-arrow,
+  .s-more .work .cat,
+  .s-more .price .num{color:#201F1F !important}
+  .s-more.on-band{background:#fff !important}
+  .s-more .chip,
+  .s-more .work{
+    background:#fff !important;
+    border-color:color-mix(in srgb,#201F1F 28%,transparent) !important;
+  }
+  .s-more .way dd,
+  .s-more .work p,
+  .s-more .lead,
+  .s-ind .lead,
+  .s-more .price .note{color:color-mix(in srgb,#201F1F 65%,#fff) !important}
+  .s-more .eyebrow,.s-ind .eyebrow{color:color-mix(in srgb,#201F1F 60%,#fff) !important}
+  .s-more .eyebrow::before,.s-ind .eyebrow::before,
+  .s-more .way dt::before,.s-more .points li::before{background:#201F1F !important}
+  .s-cta{border-top:1px solid color-mix(in srgb,#201F1F 30%,transparent)}
+  .s-cta h2,.s-cta .body p{color:#201F1F !important}
+}
+</style>
+
+<section class="s-ind" id="industries" aria-labelledby="s-ind-h">
+  <div class="wrap">
+    <p class="eyebrow">INDUSTRIES</p>
+    <h2 id="s-ind-h">業種別にできること</h2>
+    <p class="lead">業種を選ぶと、その業種の3例が表示されます。すべて「いまの手作業」と「そのあと」の対比です。</p>
+
+    <div class="tabs" role="tablist" aria-label="業種を選ぶ">
+      <button type="button" class="tab" role="tab" id="ind-tab-1" aria-controls="ind-panel-1" aria-selected="true" tabindex="0">建築・工事・施工</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-2" aria-controls="ind-panel-2" aria-selected="false" tabindex="-1">不動産</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-3" aria-controls="ind-panel-3" aria-selected="false" tabindex="-1">士業</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-4" aria-controls="ind-panel-4" aria-selected="false" tabindex="-1">金融・保険</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-5" aria-controls="ind-panel-5" aria-selected="false" tabindex="-1">リユース</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-6" aria-controls="ind-panel-6" aria-selected="false" tabindex="-1">サービス業</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-7" aria-controls="ind-panel-7" aria-selected="false" tabindex="-1">飲食・食品</button>
+      <button type="button" class="tab" role="tab" id="ind-tab-8" aria-controls="ind-panel-8" aria-selected="false" tabindex="-1">広告・クリエイティブ</button>
+    </div>
+
+    <!-- 1. 建築・工事・施工 -->
+    <div class="panel" role="tabpanel" id="ind-panel-1" aria-labelledby="ind-tab-1" tabindex="0">
+      <h3 class="panel-title">建築・工事・施工</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">案件管理</span></p>
+        <p class="before"><span class="lab">いま</span>手作業での進捗入力と共有漏れ</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>自動更新される共有管理ボードで状況を可視化</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">見積作成</span></p>
+        <p class="before"><span class="lab">いま</span>過去のデータを毎回探し、手計算で見積もり</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>テンプレートから過去データ引用・半自動で作成</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">写真管理</span></p>
+        <p class="before"><span class="lab">いま</span>現場写真の整理と報告書作成に時間がかかる</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>撮影写真を自動で案件フォルダに整理し、日報と連携</p>
+      </article>
+    </div>
+
+    <!-- 2. 不動産 -->
+    <div class="panel" role="tabpanel" id="ind-panel-2" aria-labelledby="ind-tab-2" tabindex="0" hidden>
+      <h3 class="panel-title">不動産</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">物件情報の入力</span></p>
+        <p class="before"><span class="lab">いま</span>各ポータルサイトへ物件情報を一件ずつ手入力</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>マスターデータから各サイトのフォーマットへ自動反映</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">顧客追客</span></p>
+        <p class="before"><span class="lab">いま</span>問い合わせ後の定期連絡を忘れてしまう</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>問い合わせ後のステップメールやLINE通知を自動化</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">内見調整</span></p>
+        <p class="before"><span class="lab">いま</span>担当者と顧客の間で何度もメールで日程調整</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>担当者の空き時間と連携した予約フォームをHPに設置</p>
+      </article>
+    </div>
+
+    <!-- 3. 士業 -->
+    <div class="panel" role="tabpanel" id="ind-panel-3" aria-labelledby="ind-tab-3" tabindex="0" hidden>
+      <h3 class="panel-title">士業</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">顧客オンボーディング</span></p>
+        <p class="before"><span class="lab">いま</span>新規顧客情報を手入力でシステムに登録</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>Webフォームから顧客管理システムへ自動で連携</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">定型書類の作成</span></p>
+        <p class="before"><span class="lab">いま</span>過去の書類をコピー＆ペーストして手作業で修正</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>顧客データから必要な情報を引用し、書類を自動生成</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">面談日程の調整</span></p>
+        <p class="before"><span class="lab">いま</span>候補日を複数提示し、メールで何度もやり取り</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>空き時間と連動した予約ページで日程調整を自動化</p>
+      </article>
+    </div>
+
+    <!-- 4. 金融・保険 -->
+    <div class="panel" role="tabpanel" id="ind-panel-4" aria-labelledby="ind-tab-4" tabindex="0" hidden>
+      <h3 class="panel-title">金融・保険</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">申込書の処理</span></p>
+        <p class="before"><span class="lab">いま</span>紙の申込書の内容を目視で確認し、システムに入力</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>スキャンした申込書から文字情報を読み取り、自動でデータ化</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">確認作業</span></p>
+        <p class="before"><span class="lab">いま</span>膨大なチェックリストに基づき、担当者が手動で確認</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>システムが顧客・取引情報を参照し、確認項目を自動で判定</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">レポート作成</span></p>
+        <p class="before"><span class="lab">いま</span>複数のシステムからデータを抽出し、手作業でレポートを作成</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>定型フォーマットに最新データを自動反映し、レポートを生成</p>
+      </article>
+    </div>
+
+    <!-- 5. リユース -->
+    <div class="panel" role="tabpanel" id="ind-panel-5" aria-labelledby="ind-tab-5" tabindex="0" hidden>
+      <h3 class="panel-title">リユース</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">在庫・商品登録</span></p>
+        <p class="before"><span class="lab">いま</span>商品の撮影、採寸、情報入力を個別に行い時間がかかる</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>専用アプリで撮影から情報入力までを一元管理し、登録を効率化</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">ECサイトへの出品</span></p>
+        <p class="before"><span class="lab">いま</span>各オンラインマーケットに、一つずつ商品情報を手動で登録</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>マスターデータから各ECサイトの形式に合わせて一括出品</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">買取価格の査定</span></p>
+        <p class="before"><span class="lab">いま</span>類似商品の取引価格を各サイトで個別に検索・比較</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>複数サイトの相場データを自動収集し、査定基準をダッシュボードで可視化</p>
+      </article>
+    </div>
+
+    <!-- 6. サービス業 -->
+    <div class="panel" role="tabpanel" id="ind-panel-6" aria-labelledby="ind-tab-6" tabindex="0" hidden>
+      <h3 class="panel-title">サービス業</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">予約管理</span></p>
+        <p class="before"><span class="lab">いま</span>電話やメールでの予約を台帳に手で書き写し、ダブルブッキングが発生</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>Web予約システムを導入し、空き状況をリアルタイムに自動更新</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">顧客フィードバック</span></p>
+        <p class="before"><span class="lab">いま</span>紙のアンケートを配布するが、回収・集計に手間がかかる</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>サービス利用後にアンケートURLを自動送信し、回答を自動集計</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">スタッフのシフト管理</span></p>
+        <p class="before"><span class="lab">いま</span>希望シフトの収集と調整が複雑で、管理に時間がかかる</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>スタッフがスマホから希望を提出できるシフト管理ツールを導入</p>
+      </article>
+    </div>
+
+    <!-- 7. 飲食・食品 -->
+    <div class="panel" role="tabpanel" id="ind-panel-7" aria-labelledby="ind-tab-7" tabindex="0" hidden>
+      <h3 class="panel-title">飲食・食品</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">受発注</span></p>
+        <p class="before"><span class="lab">いま</span>電話やFAXでの注文を受け、手作業で伝票を作成・管理</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>オンラインの受発注システムで注文情報を一元管理し、ミスを削減</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">在庫管理</span></p>
+        <p class="before"><span class="lab">いま</span>定期的に目視で棚卸しを行い、手作業で在庫数を更新</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>売上データと連携し、リアルタイムで在庫数を自動更新</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">予約・顧客管理</span></p>
+        <p class="before"><span class="lab">いま</span>電話予約を予約台帳で管理し、顧客情報の活用ができていない</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>Web予約と顧客情報を紐付け、リピート促進の施策に活用</p>
+      </article>
+    </div>
+
+    <!-- 8. 広告・クリエイティブ -->
+    <div class="panel" role="tabpanel" id="ind-panel-8" aria-labelledby="ind-tab-8" tabindex="0" hidden>
+      <h3 class="panel-title">広告・クリエイティブ</h3>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">01</span><span class="ex-name">プロジェクト進捗管理</span></p>
+        <p class="before"><span class="lab">いま</span>メールやチャットでの指示が散乱し、タスクの進捗が不透明</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>プロジェクト管理ツールでタスクと進捗を可視化し、チームで共有</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">02</span><span class="ex-name">レポート作成</span></p>
+        <p class="before"><span class="lab">いま</span>各広告媒体の管理画面から手動でデータを抽出し、レポートを作成</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>API連携で各媒体のデータを自動取得し、レポートを自動生成</p>
+      </article>
+      <article class="ex">
+        <p class="ex-head"><span class="ex-n">03</span><span class="ex-name">制作物の管理・共有</span></p>
+        <p class="before"><span class="lab">いま</span>ファイルサーバー内のバージョン管理が煩雑で、最新版がわからない</p>
+        <p class="ex-arrow" aria-hidden="true">→</p>
+        <p class="after"><span class="lab">こうなる</span>クラウドストレージでバージョン管理を統一し、共有・承認フローを効率化</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="s-more on-band" aria-labelledby="s-more-a">
+  <div class="wrap">
+    <p class="eyebrow">CUSTOM DEVELOPMENT</p>
+    <h2 id="s-more-a">その先へ — オーダーメイド開発</h2>
+    <p class="lead">月額の伴走で見えてきた課題が大きければ、そのままつくるところまでやります。</p>
+    <div class="cols">
+      <p class="price"><span class="num">30万円〜</span><span class="note">数百万円レンジまで対応</span></p>
+    </div>
+    <ul class="chips">
+      <li class="chip">Webアプリ</li>
+      <li class="chip">LINE連携</li>
+      <li class="chip">顧客管理</li>
+      <li class="chip">業務システム</li>
+      <li class="chip">予約管理</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s-more" aria-labelledby="s-more-b">
+  <div class="wrap">
+    <p class="eyebrow">ENTRANCE</p>
+    <h2 id="s-more-b">出会い方</h2>
+    <dl class="ways">
+      <div class="way">
+        <dt>YouTube</dt>
+        <dd>2026年8月スタート</dd>
+      </div>
+      <div class="way">
+        <dt>AI・IT勉強会</dt>
+        <dd>オンライン週1回（無料）／ オフライン月1回（3,000〜5,000円）</dd>
+      </div>
+      <div class="way">
+        <dt>DX診断</dt>
+        <dd>無料 ／ 1万円 ／ 15万円</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="s-more on-band" aria-labelledby="s-more-c">
+  <div class="wrap">
+    <p class="eyebrow">ANOTHER BUSINESS</p>
+    <h2 id="s-more-c">もうひとつの事業 — シェアハウス運営代行</h2>
+    <ul class="points">
+      <li>京都・金閣寺の近く</li>
+      <li>27歳以下 × toB事業の起業を志す若手が集まる</li>
+      <li class="em">住人同士が互いに仕事を発注し合う、共創コミュニティ</li>
+    </ul>
+  </div>
+</section>
+
+<section class="s-more" aria-labelledby="s-more-d">
+  <div class="wrap">
+    <p class="eyebrow">WORKS</p>
+    <h2 id="s-more-d">これまでにつくったもの</h2>
+    <div class="works">
+      <article class="work">
+        <p class="cat">士業</p>
+        <h3>給与計算の自動化</h3>
+        <p>複数システムをまたぐ月次の手作業を、まとめて自動化。</p>
+      </article>
+      <article class="work">
+        <p class="cat">経営者コミュニティ</p>
+        <h3>イベント管理と一斉配信</h3>
+        <p>毎月変わる案内を一元化し、案内漏れをなくす。</p>
+      </article>
+      <article class="work">
+        <p class="cat">不動産・住まい</p>
+        <h3>経費精算システム</h3>
+        <p>区分の違う経費を、レシート撮影だけで自動集計。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="s-cta" aria-labelledby="s-cta-h">
+  <div class="wrap">
+    <h2 id="s-cta-h">まずは、話すところから</h2>
+    <div class="body">
+      <p>無料のDX診断と、60分の相談から始められます。</p>
+      <p>何から手をつければいいか分からない、という状態で構いません。</p>
+      <p>そこを整理するのが、最初の仕事です。</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+  var root = document.querySelector(".s-ind");
+  if(!root){return;}
+  var list = root.querySelector('[role="tablist"]');
+  if(!list){return;}
+  var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
+  if(!tabs.length){return;}
+
+  function panelOf(tab){
+    var id = tab.getAttribute("aria-controls");
+    return id ? root.querySelector("#" + id) : null;
+  }
+
+  function select(index, moveFocus){
+    if(index < 0){ index = tabs.length - 1; }
+    if(index >= tabs.length){ index = 0; }
+    tabs.forEach(function(tab, i){
+      var on = (i === index);
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.setAttribute("tabindex", on ? "0" : "-1");
+      var panel = panelOf(tab);
+      if(panel){
+        if(on){ panel.removeAttribute("hidden"); }
+        else{ panel.setAttribute("hidden", ""); }
+      }
+    });
+    if(moveFocus){ tabs[index].focus(); }
+  }
+
+  function currentIndex(){
+    for(var i = 0; i < tabs.length; i++){
+      if(tabs[i].getAttribute("aria-selected") === "true"){ return i; }
+    }
+    return 0;
+  }
+
+  tabs.forEach(function(tab, i){
+    tab.addEventListener("click", function(){ select(i, false); });
+  });
+
+  list.addEventListener("keydown", function(e){
+    var key = e.key;
+    var i = currentIndex();
+    var next = null;
+    if(key === "ArrowRight" || key === "ArrowDown"){ next = i + 1; }
+    else if(key === "ArrowLeft" || key === "ArrowUp"){ next = i - 1; }
+    else if(key === "Home"){ next = 0; }
+    else if(key === "End"){ next = tabs.length - 1; }
+    if(next === null){ return; }
+    e.preventDefault();
+    select(next, true);
+  });
+
+  // 初期状態を確定（1つ目のタブ）
+  select(currentIndex(), false);
+}());
+</script>

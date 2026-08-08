@@ -1,0 +1,893 @@
+<style>
+/* ============================================================
+   事業説明パート（.s-svc スコープ）
+   アイボリー基調 / 左揃え非対称 / 罫線とグリッドのエディトリアル組版
+   ============================================================ */
+
+.s-svc{
+  font-family:"ZenMaru","Hiragino Maru Gothic ProN","Hiragino Sans",system-ui,sans-serif;
+  background:var(--page);
+  color:var(--text);
+  padding:clamp(48px,7vw,96px) clamp(20px,5vw,40px);
+  border-top:1px solid var(--rule);
+  overflow-x:hidden;
+}
+.s-svc + .s-svc{ border-top:none; }
+
+/* --- 内側の最大幅コンテナ --- */
+.s-svc .svc__wrap{
+  max-width:1080px;
+  margin:0 auto;
+  width:100%;
+}
+
+/* --- セクション番号＋ラベル（マーカー） --- */
+.s-svc .svc__eyebrow{
+  display:flex;
+  align-items:baseline;
+  gap:.7em;
+  margin:0 0 clamp(16px,2vw,24px);
+  padding-bottom:.7em;
+  border-bottom:1px solid var(--rule);
+}
+.s-svc .svc__num{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+  color:var(--accent-text);
+  font-weight:700;
+}
+.s-svc .svc__kicker{
+  font-size:.72rem;
+  letter-spacing:.18em;
+  color:var(--mute);
+  font-weight:600;
+}
+
+/* --- 大見出し／小さい本文の落差 --- */
+.s-svc .svc__h{
+  font-size:clamp(1.6rem,3.6vw,2.5rem);
+  line-height:1.32;
+  letter-spacing:.01em;
+  font-weight:700;
+  margin:0 0 .6em;
+  text-wrap:balance;
+  color:var(--text);
+}
+.s-svc .svc__lead{
+  font-size:clamp(.94rem,1.5vw,1.02rem);
+  line-height:1.95;
+  color:var(--text);
+  margin:0;
+  max-width:40em;
+}
+.s-svc .svc__note{
+  font-size:.82rem;
+  line-height:1.85;
+  color:var(--mute);
+  margin:0;
+}
+
+/* --- 2カラム（ラベル左 / 内容右） --- */
+.s-svc .svc__cols{
+  display:grid;
+  grid-template-columns:minmax(170px,220px) minmax(0,1fr);
+  gap:clamp(20px,3.5vw,56px);
+  align-items:start;
+}
+.s-svc .svc__label{
+  font-size:.8rem;
+  line-height:1.8;
+  letter-spacing:.06em;
+  color:var(--accent-text);
+  font-weight:700;
+  border-top:2px solid var(--accent);
+  padding-top:.8em;
+}
+.s-svc .svc__label small{
+  display:block;
+  font-size:.72rem;
+  font-weight:500;
+  letter-spacing:.04em;
+  color:var(--mute);
+  margin-top:.5em;
+}
+.s-svc .svc__body{ min-width:0; }
+
+/* ============================================================
+   1. 課題リスト
+   ============================================================ */
+.s-svc .svc__probs{
+  list-style:none;
+  margin:0;
+  padding:0;
+  border-top:1px solid var(--rule);
+}
+.s-svc .svc__probs li{
+  position:relative;
+  border-bottom:1px solid var(--rule);
+  padding:clamp(14px,2vw,20px) 0 clamp(14px,2vw,20px) 2.2em;
+  font-size:clamp(.95rem,1.6vw,1.08rem);
+  line-height:1.75;
+  text-wrap:balance;
+}
+.s-svc .svc__probs li::before{
+  content:"";
+  position:absolute;
+  left:.45em;
+  top:calc(clamp(14px,2vw,20px) + .78em);
+  width:.62em;
+  height:.62em;
+  background:var(--accent);
+}
+
+.s-svc .svc__punch{
+  margin:clamp(28px,4vw,44px) 0 0;
+  padding:clamp(22px,3.2vw,34px) clamp(20px,3vw,34px);
+  background:var(--tint);
+  border-left:4px solid var(--accent);
+  font-size:clamp(1.15rem,2.8vw,1.7rem);
+  line-height:1.6;
+  font-weight:700;
+  letter-spacing:.01em;
+  text-wrap:balance;
+}
+.s-svc .svc__punch em{
+  font-style:normal;
+  color:var(--accent-text);
+}
+
+/* ============================================================
+   2. 3つの柱
+   ============================================================ */
+.s-svc .svc__pillars{
+  list-style:none;
+  margin:clamp(24px,3vw,36px) 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+}
+.s-svc .svc__pillar{
+  background:var(--band);
+  padding:clamp(20px,2.6vw,28px);
+  min-width:0;
+}
+.s-svc .svc__pillar-i{
+  display:block;
+  font-size:.72rem;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.14em;
+  color:var(--mute);
+  margin-bottom:.9em;
+}
+.s-svc .svc__pillar-t{
+  font-size:clamp(1rem,1.9vw,1.18rem);
+  font-weight:700;
+  line-height:1.5;
+  margin:0 0 .7em;
+  color:var(--accent-text);
+  text-wrap:balance;
+}
+.s-svc .svc__pillar-d{
+  font-size:.87rem;
+  line-height:1.9;
+  color:var(--text);
+  margin:0;
+}
+
+/* ============================================================
+   3. 提供する価値
+   ============================================================ */
+.s-svc .svc__values{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0;
+  border-top:1px solid var(--rule);
+  border-left:1px solid var(--rule);
+}
+.s-svc .svc__values li{
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:clamp(16px,2.2vw,22px) clamp(14px,2vw,20px);
+  display:flex;
+  align-items:baseline;
+  gap:.8em;
+  font-size:clamp(.92rem,1.5vw,1.02rem);
+  line-height:1.7;
+  min-width:0;
+}
+.s-svc .svc__values b{
+  font-size:.7rem;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.1em;
+  color:var(--accent-text);
+  font-weight:700;
+  flex:none;
+}
+
+.s-svc .svc__claim{
+  margin:clamp(32px,4.5vw,56px) 0 0;
+  padding:clamp(28px,4.5vw,52px) clamp(22px,4vw,44px);
+  background:var(--tint);
+  border-top:3px solid var(--accent);
+  border-bottom:1px solid var(--rule);
+}
+.s-svc .svc__claim-k{
+  display:block;
+  font-size:.72rem;
+  letter-spacing:.18em;
+  color:var(--mute);
+  margin-bottom:1.1em;
+  font-weight:600;
+}
+.s-svc .svc__claim-t{
+  margin:0;
+  font-size:clamp(1.45rem,4.4vw,2.85rem);
+  line-height:1.42;
+  font-weight:700;
+  letter-spacing:.005em;
+  color:var(--accent-text);
+  text-wrap:balance;
+}
+
+/* ============================================================
+   4. 3つのプラン
+   ============================================================ */
+.s-svc .svc__plans{
+  list-style:none;
+  margin:clamp(24px,3vw,36px) 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,1.6vw,18px);
+}
+.s-svc .svc__plan{
+  position:relative;
+  background:var(--band);
+  border:1px solid var(--rule);
+  border-top:3px solid var(--rule);
+  padding:clamp(20px,2.6vw,28px);
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.s-svc .svc__plan--reco{
+  border-top-color:var(--accent);
+  background:var(--tint);
+}
+.s-svc .svc__badge{
+  display:inline-block;
+  align-self:flex-start;
+  background:var(--accent);
+  color:#201F1F;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  padding:.42em .9em;
+  margin-bottom:1em;
+}
+.s-svc .svc__badge--ghost{
+  visibility:hidden;
+}
+.s-svc .svc__price{
+  display:flex;
+  align-items:baseline;
+  gap:.15em;
+  margin-bottom:.75em;
+  font-variant-numeric:tabular-nums;
+}
+.s-svc .svc__price-n{
+  font-size:clamp(2rem,4.6vw,2.9rem);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.01em;
+  color:var(--text);
+}
+.s-svc .svc__price-u{
+  font-size:.9rem;
+  font-weight:700;
+  color:var(--text);
+}
+.s-svc .svc__price-p{
+  font-size:.74rem;
+  color:var(--mute);
+  margin-left:.4em;
+  letter-spacing:.06em;
+}
+.s-svc .svc__plan-t{
+  font-size:clamp(.98rem,1.7vw,1.1rem);
+  font-weight:700;
+  line-height:1.6;
+  margin:0 0 .7em;
+  padding-top:.7em;
+  border-top:1px solid var(--rule);
+  color:var(--accent-text);
+  text-wrap:balance;
+}
+.s-svc .svc__plan-d{
+  font-size:.86rem;
+  line-height:1.9;
+  color:var(--text);
+  margin:0;
+}
+.s-svc .svc__plans-note{
+  margin:clamp(14px,2vw,20px) 0 0;
+  font-size:.8rem;
+  color:var(--mute);
+  letter-spacing:.02em;
+}
+
+/* ============================================================
+   5. 比較表
+   ============================================================ */
+.s-svc .svc__scroller{
+  margin:clamp(24px,3vw,36px) 0 0;
+  max-width:100%;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  border:1px solid var(--rule);
+  background:var(--band);
+}
+.s-svc .svc__table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:640px;
+  font-size:.85rem;
+  font-variant-numeric:tabular-nums;
+}
+.s-svc .svc__table caption{
+  caption-side:top;
+  text-align:left;
+  padding:clamp(14px,2vw,18px) clamp(14px,2vw,18px) 0;
+  font-size:.78rem;
+  line-height:1.7;
+  color:var(--mute);
+  letter-spacing:.04em;
+}
+.s-svc .svc__table th,
+.s-svc .svc__table td{
+  padding:.72em .9em;
+  border-bottom:1px solid var(--rule);
+  text-align:left;
+  vertical-align:middle;
+  line-height:1.6;
+}
+.s-svc .svc__table thead th{
+  background:var(--tint);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:var(--accent-text);
+  border-bottom:2px solid var(--accent);
+  white-space:nowrap;
+  position:sticky;
+  top:0;
+  z-index:1;
+}
+.s-svc .svc__table thead th.svc__c{ text-align:center; }
+.s-svc .svc__table tbody th[scope="rowgroup"]{
+  width:9.5em;
+  font-size:.78rem;
+  font-weight:700;
+  color:var(--accent-text);
+  background:var(--tint);
+  border-right:1px solid var(--rule);
+  vertical-align:top;
+  padding-top:1em;
+  line-height:1.7;
+}
+.s-svc .svc__table tbody th[scope="row"]{
+  font-weight:500;
+  color:var(--text);
+  min-width:13em;
+}
+.s-svc .svc__grp + .svc__grp th[scope="rowgroup"],
+.s-svc .svc__grp + .svc__grp th[scope="row"],
+.s-svc .svc__grp + .svc__grp td{
+  border-top:1px solid var(--rule);
+}
+.s-svc .svc__table td{
+  text-align:center;
+  white-space:nowrap;
+}
+.s-svc .svc__table tbody tr:nth-child(even) th[scope="row"],
+.s-svc .svc__table tbody tr:nth-child(even) td{
+  background:var(--tint);
+}
+
+/* 記号の強弱 */
+.s-svc .svc__mk{
+  display:inline-block;
+  font-size:1.02rem;
+  line-height:1;
+}
+.s-svc .svc__mk--o{
+  color:var(--accent-text);
+  font-weight:700;
+}
+.s-svc .svc__mk--t{
+  color:var(--mute);
+  font-weight:600;
+  opacity:.9;
+}
+.s-svc .svc__mk--x{
+  color:var(--mute);
+  font-weight:400;
+  opacity:.42;
+}
+.s-svc .svc__mk-sub{
+  display:block;
+  font-size:.68rem;
+  color:var(--mute);
+  margin-top:.35em;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+.s-svc .svc__legend{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.4em;
+  margin:clamp(12px,1.6vw,16px) 0 0;
+  padding:0;
+  font-size:.76rem;
+  color:var(--mute);
+}
+.s-svc .svc__legend li{
+  display:flex;
+  align-items:baseline;
+  gap:.45em;
+}
+.s-svc .svc__hint{
+  margin:.7em 0 0;
+  font-size:.74rem;
+  color:var(--mute);
+}
+
+/* ============================================================
+   6. ご留意いただきたいこと
+   ============================================================ */
+.s-svc .svc__caveats{
+  list-style:none;
+  margin:0;
+  padding:0;
+  border-top:1px solid var(--rule);
+}
+.s-svc .svc__caveats li{
+  position:relative;
+  border-bottom:1px solid var(--rule);
+  padding:clamp(14px,2vw,18px) 0 clamp(14px,2vw,18px) 1.9em;
+  font-size:clamp(.9rem,1.5vw,.98rem);
+  line-height:1.85;
+  color:var(--text);
+}
+.s-svc .svc__caveats li::before{
+  content:"—";
+  position:absolute;
+  left:0;
+  top:clamp(14px,2vw,18px);
+  color:var(--accent-text);
+  font-weight:700;
+}
+
+/* ============================================================
+   レスポンシブ
+   ============================================================ */
+@media (max-width:860px){
+  .s-svc .svc__cols{
+    grid-template-columns:minmax(0,1fr);
+    gap:clamp(14px,3vw,22px);
+  }
+  .s-svc .svc__label{
+    border-top:2px solid var(--accent);
+    padding-top:.7em;
+  }
+  .s-svc .svc__pillars{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .s-svc .svc__plans{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .s-svc .svc__badge--ghost{ display:none; }
+}
+@media (max-width:560px){
+  .s-svc .svc__values{
+    grid-template-columns:minmax(0,1fr);
+  }
+}
+
+/* ============================================================
+   印刷
+   ============================================================ */
+@media print{
+  .s-svc{
+    background:#fff;
+    color:#000;
+    padding:14mm 0;
+    border-top:none;
+    break-inside:avoid;
+  }
+  .s-svc .svc__wrap{ max-width:none; }
+  .s-svc .svc__h{ font-size:15pt; margin-bottom:.5em; }
+  .s-svc .svc__lead,
+  .s-svc .svc__pillar-d,
+  .s-svc .svc__plan-d{ font-size:9pt; line-height:1.7; }
+  .s-svc .svc__punch{ font-size:12pt; background:#fff; padding:8pt 10pt; }
+  .s-svc .svc__claim-t{ font-size:17pt; }
+  .s-svc .svc__claim{ background:#fff; padding:10pt 0; }
+  .s-svc .svc__price-n{ font-size:18pt; }
+  .s-svc .svc__pillars,
+  .s-svc .svc__plans,
+  .s-svc .svc__values,
+  .s-svc .svc__pillar,
+  .s-svc .svc__plan,
+  .s-svc .svc__punch,
+  .s-svc .svc__claim,
+  .s-svc .svc__probs li,
+  .s-svc .svc__caveats li,
+  .s-svc .svc__grp{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+  .s-svc .svc__pillar,
+  .s-svc .svc__plan,
+  .s-svc .svc__badge{
+    background:#fff;
+    color:#000;
+  }
+  .s-svc .svc__badge{ border:1pt solid #000; }
+  .s-svc .svc__scroller{
+    overflow-x:visible;
+    break-inside:auto;
+    page-break-inside:auto;
+  }
+  .s-svc .svc__table{
+    min-width:0;
+    width:100%;
+    font-size:7.6pt;
+  }
+  .s-svc .svc__table th,
+  .s-svc .svc__table td{ padding:.4em .5em; }
+  .s-svc .svc__table thead{ display:table-header-group; }
+  .s-svc .svc__table thead th,
+  .s-svc .svc__table tbody th[scope="rowgroup"],
+  .s-svc .svc__table tbody tr:nth-child(even) th[scope="row"],
+  .s-svc .svc__table tbody tr:nth-child(even) td{
+    background:#fff;
+    color:#000;
+  }
+  .s-svc .svc__table th,
+  .s-svc .svc__table td{ border-color:#999; }
+  .s-svc .svc__mk--x{ opacity:.6; }
+  .s-svc .svc__hint{ display:none; }
+}
+</style>
+
+<section class="s-svc" aria-labelledby="svc-issues">
+  <div class="svc__wrap">
+    <div class="svc__cols">
+      <div class="svc__label">
+        01 / ISSUES
+        <small>お客様からよく伺うこと</small>
+      </div>
+      <div class="svc__body">
+        <h2 class="svc__h" id="svc-issues">こんな課題、ありませんか？</h2>
+        <ul class="svc__probs">
+          <li>毎回同じ作業を、手でやっている</li>
+          <li>HPを直したいと思いながら、放置している</li>
+          <li>システムが使いにくいが、誰に頼めばいいかわからない</li>
+          <li>エンジニアを雇うほどではないが、相談相手がほしい</li>
+        </ul>
+        <p class="svc__punch">その「ちょっと困っている」を、<em>月額で解決します。</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-svc" aria-labelledby="svc-about">
+  <div class="svc__wrap">
+    <div class="svc__cols">
+      <div class="svc__label">
+        02 / SERVICE
+        <small>サービスの輪郭</small>
+      </div>
+      <div class="svc__body">
+        <h2 class="svc__h" id="svc-about">パートナーエンジニアとは</h2>
+        <p class="svc__lead">エンジニアを雇うのが難しい方に向けて、業務・HP・既存システムを技術的に改善する月額サービスです。</p>
+        <ul class="svc__pillars">
+          <li class="svc__pillar">
+            <span class="svc__pillar-i">01</span>
+            <h3 class="svc__pillar-t">業務を整理する</h3>
+            <p class="svc__pillar-d">毎回手でやっている作業や、なんとなく続けている業務を一緒に整理して、「今すぐ直したほうがいいところ」を見つけます。</p>
+          </li>
+          <li class="svc__pillar">
+            <span class="svc__pillar-i">02</span>
+            <h3 class="svc__pillar-t">小さく直す</h3>
+            <p class="svc__pillar-d">「エンジニアに頼まないとできないから」と後回しにしているHPや仕組みの修正を、小さく切り出して手を入れます。</p>
+          </li>
+          <li class="svc__pillar">
+            <span class="svc__pillar-i">03</span>
+            <h3 class="svc__pillar-t">判断する</h3>
+            <p class="svc__pillar-d">システムを作るか迷っていることを、作らない選択も含めて整理し、ちょうどいいタイミングを判断します。</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-svc" aria-labelledby="svc-value">
+  <div class="svc__wrap">
+    <div class="svc__cols">
+      <div class="svc__label">
+        03 / VALUE
+        <small>お渡しできるもの</small>
+      </div>
+      <div class="svc__body">
+        <h2 class="svc__h" id="svc-value">提供する価値</h2>
+        <ul class="svc__values">
+          <li><b>01</b><span>手作業を減らす</span></li>
+          <li><b>02</b><span>放置されたHPを、使える状態にする</span></li>
+          <li><b>03</b><span>使いにくいシステムを整理・改善する</span></li>
+          <li><b>04</b><span>将来の開発につながる判断をする</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="svc__claim">
+      <span class="svc__claim-k">PARTNER ENGINEER</span>
+      <p class="svc__claim-t">エンジニアを雇わずに、技術の相談相手を持つ。</p>
+    </div>
+  </div>
+</section>
+
+<section class="s-svc" aria-labelledby="svc-plans">
+  <div class="svc__wrap">
+    <div class="svc__cols">
+      <div class="svc__label">
+        04 / PLANS
+        <small>月額3プラン</small>
+      </div>
+      <div class="svc__body">
+        <h2 class="svc__h" id="svc-plans">3つのプラン</h2>
+        <ul class="svc__plans">
+          <li class="svc__plan">
+            <span class="svc__badge svc__badge--ghost" aria-hidden="true">おすすめ</span>
+            <p class="svc__price"><span class="svc__price-n">2.5</span><span class="svc__price-u">万円</span><span class="svc__price-p">／ 月</span></p>
+            <h3 class="svc__plan-t">小さく自動化・現状整理</h3>
+            <p class="svc__plan-d">まずは身近な手作業をなくし、課題を整理するところから始めます。</p>
+          </li>
+          <li class="svc__plan svc__plan--reco">
+            <span class="svc__badge">おすすめ</span>
+            <p class="svc__price"><span class="svc__price-n">5</span><span class="svc__price-u">万円</span><span class="svc__price-p">／ 月</span></p>
+            <h3 class="svc__plan-t">業務をまたいで仕組み化</h3>
+            <p class="svc__plan-d">複数のツールや業務を連携させ、組織全体の効率を改善します。</p>
+          </li>
+          <li class="svc__plan">
+            <span class="svc__badge svc__badge--ghost" aria-hidden="true">おすすめ</span>
+            <p class="svc__price"><span class="svc__price-n">10</span><span class="svc__price-u">万円</span><span class="svc__price-p">／ 月</span></p>
+            <h3 class="svc__plan-t">小さな業務システムを一緒に作る</h3>
+            <p class="svc__plan-d">既存ツールでは解決できない課題に対し、最適なツールを共同で設計・作成します。</p>
+          </li>
+        </ul>
+        <p class="svc__plans-note">※ 全プラン共通で隔週MTGを実施</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-svc" aria-labelledby="svc-compare">
+  <div class="svc__wrap">
+    <div class="svc__cols">
+      <div class="svc__label">
+        05 / COMPARISON
+        <small>対応範囲の違い</small>
+      </div>
+      <div class="svc__body">
+        <h2 class="svc__h" id="svc-compare">プラン比較表</h2>
+        <ul class="svc__legend">
+          <li><span class="svc__mk svc__mk--o">◎</span> 対応します</li>
+          <li><span class="svc__mk svc__mk--t">△</span> 内容により対応</li>
+          <li><span class="svc__mk svc__mk--x">×</span> 対象外</li>
+        </ul>
+        <p class="svc__hint">※ 表は横にスクロールできます</p>
+      </div>
+    </div>
+
+    <div class="svc__scroller" tabindex="0" role="region" aria-label="プラン比較表（横スクロール）">
+      <table class="svc__table">
+        <caption>6つの比較軸ごとに、各プラン（月額2.5万円 / 5万円 / 10万円）の対応範囲を示した比較表です。◎は対応、△は内容により対応、×は対象外を表します。</caption>
+        <thead>
+          <tr>
+            <th scope="col">比較軸</th>
+            <th scope="col">項目</th>
+            <th scope="col" class="svc__c">2.5万</th>
+            <th scope="col" class="svc__c">5万</th>
+            <th scope="col" class="svc__c">10万</th>
+          </tr>
+        </thead>
+
+        <tbody class="svc__grp">
+          <tr>
+            <th scope="rowgroup" rowspan="3">① 業務自動化（GASなど）</th>
+            <th scope="row">単純作業の自動化</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">複数業務をまたぐ自動化</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">DB設計を前提にした自動化</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+        </tbody>
+
+        <tbody class="svc__grp">
+          <tr>
+            <th scope="rowgroup" rowspan="4">② ツール連携</th>
+            <th scope="row">Googleフォーム連携</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">スプレッドシート連携</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">公式LINE連携</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">外部API連携</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+        </tbody>
+
+        <tbody class="svc__grp">
+          <tr>
+            <th scope="rowgroup" rowspan="4">③ HP改修</th>
+            <th scope="row">テキスト・画像差し替え</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">レイアウト調整</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span><span class="svc__mk-sub">最大4セクション</span></td>
+          </tr>
+          <tr>
+            <th scope="row">フォーム改善</th>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">業務連携を前提にした改修</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+        </tbody>
+
+        <tbody class="svc__grp">
+          <tr>
+            <th scope="rowgroup" rowspan="4">④ 既存システムのお困りごと</th>
+            <th scope="row">使いにくさの洗い出し</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">要件整理・壁打ち</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">既存ツールでの改善</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">自作ツールの作成</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+        </tbody>
+
+        <tbody class="svc__grp">
+          <tr>
+            <th scope="rowgroup" rowspan="4">⑤ MTGの中身</th>
+            <th scope="row">困りごと相談</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">設計レビュー</th>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">業務・システム設計</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">開発切り出し判断</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+        </tbody>
+
+        <tbody class="svc__grp">
+          <tr>
+            <th scope="rowgroup" rowspan="3">⑥ 開発へのつながり</th>
+            <th scope="row">小改善の継続</th>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">本格開発の企画</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+          <tr>
+            <th scope="row">中〜大型開発への接続</th>
+            <td><span class="svc__mk svc__mk--x" aria-label="対象外">×</span></td>
+            <td><span class="svc__mk svc__mk--t" aria-label="内容により対応">△</span></td>
+            <td><span class="svc__mk svc__mk--o" aria-label="対応します">◎</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="s-svc" aria-labelledby="svc-caveats">
+  <div class="svc__wrap">
+    <div class="svc__cols">
+      <div class="svc__label">
+        06 / NOTES
+        <small>先にお伝えすること</small>
+      </div>
+      <div class="svc__body">
+        <h2 class="svc__h" id="svc-caveats">ご留意いただきたいこと</h2>
+        <ul class="svc__caveats">
+          <li>大規模改修やWebサイトの全面リニューアルは対象外となります。</li>
+          <li>業務の根幹に関わるロジックの変更は、別途開発としてご提案します。</li>
+          <li>ご依頼内容の複雑さや工数によっては、別途お見積りとなる場合がございます。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
